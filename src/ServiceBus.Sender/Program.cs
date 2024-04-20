@@ -2,45 +2,35 @@
 using ServiceBus.Sender.Utilties;
 using System.Text.Json;
 
-// the client that owns the connection and can be used to create senders and receivers
 ServiceBusClient client;
-
-// the sender used to publish messages to the queue
 ServiceBusSender sender;
 
-// number of messages to be sent to the queue
+// The number of messages to be sent to the queue
 const int numOfMessages = 1;
 
-// The Service Bus client types are safe to cache and use as a singleton for the lifetime
-// of the application, which is best practice when messages are being published or read
-// regularly.
-
-// set the transport type to AmqpWebSockets so that the ServiceBusClient uses the port 443. 
-// If you use the default AmqpTcp, you will need to make sure that the ports 5671 and 5672 are open
+// Set the transport type to AmqpWebSockets so that the ServiceBusClient uses the port 443. 
+// If you use the default AmqpTcp, you will need to make sure that the ports 5671 and 5672 are open.
 var clientOptions = new ServiceBusClientOptions()
 {
     TransportType = ServiceBusTransportType.AmqpWebSockets
 };
 
-// TODO: Replace the <NAMESPACE-CONNECTION-STRING> and <QUEUE-NAME> placeholders
-client = new ServiceBusClient("", clientOptions);
-sender = client.CreateSender("test-queue");
+// TODO: Replace the <NAMESPACE-CONNECTION-STRING> and <QUEUE-NAME> with your connection info
+client = new ServiceBusClient("<NAMESPACE-CONNECTION-STRING>", clientOptions);
+sender = client.CreateSender("<QUEUE-NAME>");
 
 // create a batch 
 using ServiceBusMessageBatch messageBatch = await sender.CreateMessageBatchAsync();
 
 for (int i = 1; i <= numOfMessages; i++)
 {
-    // need to add data to the queue with this information
+    // Generate information that will be added to queue
     var packet = Helpers.CreateDataPacket();
 
     var serializedData = JsonSerializer.Serialize(packet);
 
-    // try adding a message to the batch
-    //if (!messageBatch.TryAddMessage(new ServiceBusMessage($"Sending {i} test message(s) to queue")))
     if (!messageBatch.TryAddMessage(new ServiceBusMessage(serializedData)))
     {
-        // if it is too large for the batch
         throw new Exception($"The message {i} is too large to fit in the batch.");
     }
 }
@@ -53,8 +43,6 @@ try
 }
 finally
 {
-    // Calling DisposeAsync on client types is required to ensure that network
-    // resources and other unmanaged objects are properly cleaned up.
     await sender.DisposeAsync();
     await client.DisposeAsync();
 }
