@@ -1,5 +1,5 @@
 ﻿using Azure.Messaging.ServiceBus;
-using ServiceBus.Common;
+using ServiceBus.Sender.Utilties;
 using System.Text.Json;
 
 // the client that owns the connection and can be used to create senders and receivers
@@ -32,12 +32,7 @@ using ServiceBusMessageBatch messageBatch = await sender.CreateMessageBatchAsync
 for (int i = 1; i <= numOfMessages; i++)
 {
     // need to add data to the queue with this information
-    var packet = new DataPacket
-    {
-        FromDate = DateTime.UtcNow.AddDays(-1),
-        ToDate = DateTime.UtcNow,
-        RadarList = new List<string> { "v001", "v002" }
-    };
+    var packet = Helpers.CreateDataPacket();
 
     var serializedData = JsonSerializer.Serialize(packet);
 
