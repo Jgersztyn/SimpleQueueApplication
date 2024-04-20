@@ -23,8 +23,8 @@ var clientOptions = new ServiceBusClientOptions()
 };
 
 // TODO: Replace the <NAMESPACE-CONNECTION-STRING> and <QUEUE-NAME> placeholders
-client = new ServiceBusClient("<NAMESPACE-CONNECTION-STRING>", clientOptions);
-sender = client.CreateSender("<QUEUE-NAME>");
+client = new ServiceBusClient("", clientOptions);
+sender = client.CreateSender("test-queue");
 
 // create a batch 
 using ServiceBusMessageBatch messageBatch = await sender.CreateMessageBatchAsync();

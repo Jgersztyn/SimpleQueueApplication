@@ -21,11 +21,11 @@ var clientOptions = new ServiceBusClientOptions()
 };
 
 // TODO: Replace the <NAMESPACE-CONNECTION-STRING> placeholder
-client = new ServiceBusClient("<NAMESPACE-CONNECTION-STRING>", clientOptions);
+client = new ServiceBusClient("", clientOptions);
 
 // create a processor that we can use to process the messages
 // TODO: Replace the <QUEUE-NAME> placeholder
-processor = client.CreateProcessor("<QUEUE-NAME>", new ServiceBusProcessorOptions());
+processor = client.CreateProcessor("test-queue", new ServiceBusProcessorOptions());
 
 try
 {
