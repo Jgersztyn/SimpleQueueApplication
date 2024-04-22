@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceBusSender", "ServiceBusSender\ServiceBusSender.csproj", "{B558A5F5-854F-4237-8CE6-6E5DC9F18567}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceBus.Sender", "src\ServiceBus.Sender\ServiceBus.Sender.csproj", "{B558A5F5-854F-4237-8CE6-6E5DC9F18567}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceBusReceiver", "ServiceBusReceiver\ServiceBusReceiver.csproj", "{51B2AA11-E456-43E4-A410-82D0B23E9F5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceBus.Receiver", "src\ServiceBus.Receiver\ServiceBus.Receiver.csproj", "{51B2AA11-E456-43E4-A410-82D0B23E9F5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBus.Common", "ServiceBus.Common\ServiceBus.Common.csproj", "{4C009342-3D7E-4E14-9712-1CAE615B1797}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBus.Common", "src\ServiceBus.Common\ServiceBus.Common.csproj", "{4C009342-3D7E-4E14-9712-1CAE615B1797}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
